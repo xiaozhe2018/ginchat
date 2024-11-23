@@ -22,3 +22,7 @@ type UserBasic struct {
 func (table *UserBasic) TableName() string {
 	return "user_basic"
 }
+
+func GetUserList() {
+
+}
