@@ -1,2 +1,11 @@
 mysql:
-  dns: root:123456@tcp(127.0.0.1:23306)/ginchat?charset=utf8mb4&parseTime=True&loc=Local
+  dns: root:123456@tcp(127.0.0.1:23306)/ginchat?charset=utf8mb4&parseTime=True&loc=Local 
+  #先拆后拼 ， 以后优化
+  name: root 
+  pass: 123456
+  port: 23306
+  database : ginchat
+  charset: utf8mb4
+  host: 127.0.0.1
+  parseTime: true
+  loc: Local

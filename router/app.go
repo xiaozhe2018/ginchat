@@ -1,9 +1,13 @@
 package router
 
 import (
+	"gitchat/docs"
 	"gitchat/service"
 
 	"github.com/gin-gonic/gin"
+
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // func Router() {
@@ -19,6 +23,9 @@ import (
 func Router() *gin.Engine {
 
 	r := gin.Default()
+	docs.SwaggerInfo.BasePath = "/api/v1"
+	//swagger
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	//首页
 	r.GET("index", service.GetIndex)
 	//获取用户列表
