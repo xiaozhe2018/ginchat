@@ -32,3 +32,19 @@ func GetUserList() []*UserBasic {
 	utils.DB.Find(&data)
 	return data
 }
+
+// 新增
+func AddUser(user *UserBasic) (err error) {
+	err = utils.DB.Create(user).Error
+	return err
+}
+
+// 修改
+func UpdateUser(user *UserBasic) (err error) {
+	err = utils.DB.Save(user).Error
+	return err
+}
+
+//删除
+
+//查询

@@ -29,6 +29,21 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/user/get_user_list": {
+            "get": {
+                "tags": [
+                    "GetUserList"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "json"
+                        }
+                    }
+                }
+            }
         }
     }
 }`

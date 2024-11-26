@@ -7,9 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-/**
-* 获取用户列表
- */
+// GetUserList
+// @Tags GetUserList
+// @Success 200 {json} {code:200,message:{}]}
+// @Router /user/get_user_list [get]
 func GetUserList(c *gin.Context) {
 	data := models.GetUserList()
 	c.JSON(http.StatusOK, gin.H{
