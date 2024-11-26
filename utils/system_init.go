@@ -9,6 +9,8 @@ import (
 )
 
 // 设置配置文件
+var DB *gorm.DB
+
 func ConfigInit() {
 	//配置文件名称
 	viper.SetConfigName("app")
@@ -21,12 +23,8 @@ func ConfigInit() {
 	// fmt.Println("config app:", viper.Get("mysql"))
 
 }
-func InitMysql() *gorm.DB {
+func InitMysql() {
 	//获取配置文件
 	dsn := viper.GetString("mysql.dns")
-	DB, _ := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	// user := models.UserBasic{}
-	// DB.Find(&user)
-	// fmt.Println("data:", user)
-	return DB
+	DB, _ = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 }

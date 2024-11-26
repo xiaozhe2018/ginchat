@@ -19,7 +19,10 @@ import (
 func Router() *gin.Engine {
 
 	r := gin.Default()
+	//首页
 	r.GET("index", service.GetIndex)
+	//获取用户列表
+	r.GET("user/get_user_list", service.GetUserList)
 
 	return r
 }

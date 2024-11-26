@@ -9,6 +9,6 @@ import (
 // 处理index
 func GetIndex(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"message": "你好啊！！",
+		"message": "this is home !!",
 	})
 }

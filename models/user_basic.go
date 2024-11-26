@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gitchat/utils"
+
+	"gorm.io/gorm"
+)
 
 // 结构体
 type UserBasic struct {
@@ -23,6 +27,8 @@ func (table *UserBasic) TableName() string {
 	return "user_basic"
 }
 
-func GetUserList() {
-
+func GetUserList() []*UserBasic {
+	data := make([]*UserBasic, 10)
+	utils.DB.Find(&data)
+	return data
 }
