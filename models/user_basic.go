@@ -2,6 +2,8 @@ package models
 
 import (
 	"gitchat/utils"
+	"log"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -22,6 +24,12 @@ type UserBasic struct {
 	IsLogout      bool
 	DeviceInfo    string
 }
+type Model struct {
+	ID        uint           `gorm:"primarykey"`
+	CreatedAt time.Time      `gorm:"default:CURRENT_TIMESTAMP"`
+	UpdatedAt time.Time      `gorm:"default:CURRENT_TIMESTAMP"`
+	DeletedAt gorm.DeletedAt `gorm:"index"`
+}
 
 func (table *UserBasic) TableName() string {
 	return "user_basic"
@@ -32,6 +40,15 @@ func GetUserList() []*UserBasic {
 	utils.DB.Find(&data)
 	return data
 }
+func GetUserName(name string) string {
+	data := []*UserBasic{}
+	err := utils.DB.Where("name=?", name).First(&data).Error
+	if err != nil {
+		log.Println("查询用户失败", err)
+		return ""
+	}
+	return data[0].Name
+}
 
 // 新增
 func AddUser(user *UserBasic) (err error) {
@@ -41,10 +58,16 @@ func AddUser(user *UserBasic) (err error) {
 
 // 修改
 func UpdateUser(user *UserBasic) (err error) {
-	err = utils.DB.Save(user).Error
+	// err = utils.DB.Save(user).Error
+	err = utils.DB.Model(user).Where("id=?", user.ID).Updates(user).Error
 	return err
 }
 
-//删除
+// 删除
+func DeleteUser(id int) (err error) {
+	user := &UserBasic{}
+	err = utils.DB.Delete(&user, id).Error
+	return err
+}
 
 //查询

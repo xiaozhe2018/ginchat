@@ -10,6 +10,83 @@ paths:
             type: string
       tags:
       - 首页
+  /user/add_user:
+    post:
+      consumes:
+      - application/json
+      description: 用于添加新用户的接口
+      parameters:
+      - description: 用户名
+        in: query
+        name: name
+        type: string
+      - description: 密码
+        in: query
+        name: pass
+        type: string
+      - description: 确认密码
+        in: query
+        name: pass2
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 成功响应
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: 请求参数错误
+          schema:
+            additionalProperties: true
+            type: object
+      summary: 添加用户
+      tags:
+      - AddUser
+  /user/delete_user:
+    get:
+      consumes:
+      - application/json
+      description: 删除用户
+      parameters:
+      - description: 用户ID
+        in: query
+        name: id
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 删除用户
+      tags:
+      - DeleteUser
+  /user/edit:
+    post:
+      consumes:
+      - application/json
+      description: 修改用户
+      parameters:
+      - description: ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: 用户名
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: 密码
+        in: query
+        name: pwd
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: 修改用户
+      tags:
+      - UpdateUser
   /user/get_user_list:
     get:
       responses:

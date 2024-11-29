@@ -30,6 +30,11 @@ func Router() *gin.Engine {
 	r.GET("index", service.GetIndex)
 	//获取用户列表
 	r.GET("user/get_user_list", service.GetUserList)
-
+	//添加用户
+	r.POST("user/add_user", service.AddUser)
+	//删除用户
+	r.GET("user/delete_user", service.DeleteUser)
+	//修改用户
+	r.POST("user/edit", service.UpdateUser)
 	return r
 }
