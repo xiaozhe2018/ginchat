@@ -36,5 +36,7 @@ func Router() *gin.Engine {
 	r.GET("user/delete_user", service.DeleteUser)
 	//修改用户
 	r.POST("user/edit", service.UpdateUser)
+	//用户登录
+	r.POST("user/login", service.LoginUser)
 	return r
 }

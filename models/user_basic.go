@@ -13,10 +13,11 @@ type UserBasic struct {
 	gorm.Model
 	Name          string
 	PassWord      string
-	Phone         string
-	Email         string
+	Phone         string `valid:"matches(^1[3-9]{1}\\d{9}$)"`
+	Email         string `valid:"IsEmail"` //要下载govalidate库  go get github.com/asaskevich/govalidator
 	Identity      string //用户唯一标识
 	ClentIp       string
+	Salt          string //随机数加盐
 	ClientPort    string
 	LoginTime     uint64
 	HeartbeatTime uint64
@@ -40,6 +41,8 @@ func GetUserList() []*UserBasic {
 	utils.DB.Find(&data)
 	return data
 }
+
+// 获取用户名
 func GetUserName(name string) string {
 	data := []*UserBasic{}
 	err := utils.DB.Where("name=?", name).First(&data).Error
@@ -48,6 +51,23 @@ func GetUserName(name string) string {
 		return ""
 	}
 	return data[0].Name
+}
+
+// 返回用户全部字段
+func GetUserAllField(name string) *UserBasic {
+	data := &UserBasic{}
+	utils.DB.Where("name=?", name).First(&data)
+	return data
+}
+
+// 返回指定用户字段的信息
+func GetUserField(field string, value string) (string, string) {
+	data := []*UserBasic{}
+	utils.DB.Where(field+"=?", value).Find(&data)
+	if len(data) > 0 {
+		return field, data[0].Name
+	}
+	return field, ""
 }
 
 // 新增

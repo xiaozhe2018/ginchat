@@ -61,6 +61,18 @@ const docTemplate = `{
                         "description": "确认密码",
                         "name": "pass2",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "手机号",
+                        "name": "phone",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮箱",
+                        "name": "email",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -139,6 +151,20 @@ const docTemplate = `{
                         "name": "pwd",
                         "in": "query",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "邮箱",
+                        "name": "email",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "电话号码",
+                        "name": "phone",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {}
@@ -157,6 +183,38 @@ const docTemplate = `{
                         }
                     }
                 }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "description": "用户登录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "LoginUser"
+                ],
+                "summary": "用户登录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用户名/邮箱/手机号码",
+                        "name": "name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "密码",
+                        "name": "pass",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
             }
         }
     }
